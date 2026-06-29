@@ -1,0 +1,24 @@
+{
+  "name": "vellam-desktop",
+  "version": "0.1.0",
+  "description": "Vellam — local AI browser agent, packaged as a Windows desktop app",
+  "author": "Vellam",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "cross-env ELECTRON_DEV=1 electron .",
+    "build:frontend": "node scripts/build-frontend.js",
+    "build:backend": "node scripts/build-backend.js",
+    "build:all": "npm run build:frontend && npm run build:backend",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:full": "npm run build:all && electron-builder"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^33.3.0",
+    "electron-builder": "^25.1.8"
+  }
+}

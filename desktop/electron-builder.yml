@@ -1,0 +1,59 @@
+appId: ai.vellam.desktop
+productName: Vellam
+copyright: Copyright © 2026 Vellam
+
+directories:
+  output: dist
+  buildResources: build
+
+# Files that make up the Electron app itself (packed into app.asar).
+files:
+  - main.js
+  - preload.js
+  - splash.html
+  - lib/**/*
+  - build/icon.ico
+  - package.json
+
+asar: true
+
+# Large, pre-built payloads shipped alongside the app (under resources/).
+# main.js reads these from process.resourcesPath at runtime.
+extraResources:
+  - from: ../frontend/out
+    to: frontend/out
+    filter: ["**/*"]
+  - from: ../backend/dist/vellam-backend
+    to: backend
+    filter: ["**/*"]
+  - from: ../backend/pw-browsers
+    to: ms-playwright
+    filter: ["**/*"]
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: build/icon.ico
+  artifactName: ${productName}-Setup-${version}.${ext}
+  # We don't code-sign (no certificate). Disabling the sign-and-edit step skips the
+  # only path that fetches electron-builder's winCodeSign tool — whose archive
+  # contains macOS symlinks that can't be extracted on Windows without admin /
+  # Developer Mode, which otherwise breaks the build on a standard user account.
+  # asar-integrity is updated in an earlier step, so the app still launches; the
+  # only effect is the bare Vellam.exe file uses the default Electron icon (the
+  # running window, taskbar, installer and shortcuts still use build/icon.ico).
+  signAndEditExecutable: false
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Vellam
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  # Installer is large (~700MB+) because it bundles Python + Chromium; allow the
+  # extra time the compression step needs.
+  differentialPackage: false

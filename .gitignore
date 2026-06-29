@@ -1,0 +1,53 @@
+# ── Secrets & local data (never commit) ─────────────────────────────────────
+# Encrypted credential vault + its Fernet-fallback key
+vault.enc
+vault.enc.key
+
+# SQLite database + WAL/journal sidecars
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+
+# Environment files (keep the committed template)
+.env
+.env.*
+!.env.example
+
+# ── Python (backend) ────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Next.js / Node (frontend) ───────────────────────────────────────────────
+node_modules/
+.next/
+out/
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Desktop (Electron) build artifacts ──────────────────────────────────────
+# Downloaded Chromium staged for the installer (~700 MB) and PyInstaller output.
+backend/pw-browsers/
+backend/dist/
+backend/build/
+desktop/dist/
+
+# …but DO keep the source app icon, which lives in an otherwise-ignored build/ dir.
+!desktop/build/
+!desktop/build/icon.ico
+
+# ── OS / editor noise ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

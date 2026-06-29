@@ -1,0 +1,27 @@
+# Normalize line endings so the repo is consistent across machines regardless of
+# each contributor's core.autocrlf setting. Text files are stored with LF in the
+# repository and checked out with the platform's native endings.
+* text=auto
+
+# Files that must keep specific endings to function:
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+*.sh    text eol=lf
+
+# Binary assets — never apply line-ending or other text conversion to these.
+*.ico   binary
+*.icns  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.svg   text
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.exe   binary
+*.dll   binary
+*.db    binary
+*.enc   binary
