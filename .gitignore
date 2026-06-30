@@ -15,6 +15,9 @@ vault.enc.key
 !.env.example
 
 # ── Python (backend) ────────────────────────────────────────────────────────
+# Runtime data the app recreates on startup — never commit dev artifacts.
+logs/
+uploads/
 __pycache__/
 *.py[cod]
 .venv/
